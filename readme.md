@@ -7,7 +7,37 @@ StreamCSV can read CSV data from streams of data.
 This means you can parse arbitrarily large amounts of data without having to fit
 it all into memory at once.
 
-Generally, all the functions are structured as follows:
+## The high-level `streamcsv` module
+
+A simple example, this will iterate over all records ("lines") of a CSV file:
+
+```lua
+for idx, record in streamcsv.records(io.open("test.csv")) do
+	print(table.unpack(record))
+end
+```
+
+This file will be treated as having no initial header line. To indicate that the
+first line should be read as a header, set the `header` option to true:
+
+```lua
+for idx, record in streamcsv.records(io.open("test2.csv", {header=true})) do
+	print(table.unpack(record))
+end
+```
+
+When a header is not part of the CSV file, but is otherwise known, it can be
+passed explicitly:
+
+```lua
+for idx, record in streamcsv.records("1,2,3", header="a,b,c")
+-- or
+for idx, record in streamcsv.records("1,2,3", header={"a", "b", "c"})
+```
+
+## The low-level `streamcsv.read` module
+
+Generally, all the functions of this module are structured as follows:
 
 ### Arguments
 
