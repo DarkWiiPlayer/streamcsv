@@ -12,7 +12,7 @@ local q = ('"'):byte()
 -- @return The main result of the function
 -- @treturn string The current string snippet returned by `consume`
 -- @treturn number The next index to be parsed
-function read.ufield(current, sep, first, consume)
+function read.ufield(current, first, sep, consume)
 	local first = first or 1
 	sep = "["..(sep or "\n,").."]"
 	local last = current:find(sep, first)
@@ -46,7 +46,7 @@ end
 -- @return The main result of the function
 -- @treturn string The current string snippet returned by `consume`
 -- @treturn number The next index to be parsed
-function read.qfield(current, sep, first, consume)
+function read.qfield(current, first, sep, consume)
 	local first = first or 1
 	local q = q
 	if first > #current then
@@ -111,12 +111,12 @@ end
 -- @return The main result of the function
 -- @treturn string The current string snippet returned by `consume`
 -- @treturn number The next index to be parsed
-function read.field(current, sep, first, consume)
+function read.field(current, first, sep, consume)
 	local first = first or 1
 	if current:byte(first,first) == q then
-		return read.qfield(current, sep, first, consume)
+		return read.qfield(current, first, sep, consume)
 	else
-		return read.ufield(current, sep, first, consume)
+		return read.ufield(current, first, sep, consume)
 	end
 end
 
@@ -127,14 +127,14 @@ end
 -- @return The main result of the function
 -- @treturn string The current string snippet returned by `consume`
 -- @treturn number The next index to be parsed
-function read.record(current, sep, first, consume)
+function read.record(current, first, sep, consume)
 	local first = first or 1
 	local record = {}
 	local field
 	sep = sep or '\n,'
 	local rsep = sep:byte(1, 1)
 	while first do
-		field, current, first = read.field(current, sep, first, consume)
+		field, current, first = read.field(current, first, sep, consume)
 		table.insert(record, field)
 		if first then
 			if current:byte(first, first) == rsep then
@@ -154,12 +154,12 @@ end
 -- @return The main result of the function
 -- @treturn string The current string snippet returned by `consume`
 -- @treturn number The next index to be parsed
-function read.file(current, sep, first, consume)
+function read.file(current, first, sep, consume)
 	local first = first or 1
 	local file = {}
 	local record
 	while first do
-		record, current, first = read.record(current, sep, first, consume)
+		record, current, first = read.record(current, first, sep, consume)
 		table.insert(file, record)
 		if first then
 			first = first + 1

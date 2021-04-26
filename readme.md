@@ -12,8 +12,8 @@ Generally, all the functions are structured as follows:
 ### Arguments
 
 1. An initial string (can be empty)
-2. A string containing the record and field separators (default `"\n,"`)
 3. At what position in the initial string to start parsing
+2. A string containing the record and field separators (default `"\n,"`)
 4. A generator function that returns the next string from the stream or nil
 
 Note that if the generator function should return an empty string, the parser
