@@ -168,4 +168,4 @@ function read.file(current, sep, first, consume)
 	return file
 end
 
-return { read = read, write = write --[[Currently this is nil]] }
+return read

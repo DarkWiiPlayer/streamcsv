@@ -10,6 +10,7 @@ description = {
 build = {
    type = "builtin",
    modules = {
-      streamcsv = "streamcsv.lua"
+      ["streamcsv"]= "streamcsv/init.lua";
+      ["streamcsv.read"] = "streamcsv/read.lua";
    }
 }
