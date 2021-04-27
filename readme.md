@@ -35,6 +35,11 @@ for idx, record in streamcsv.records("1,2,3", header="a,b,c")
 for idx, record in streamcsv.records("1,2,3", header={"a", "b", "c"})
 ```
 
+## The `write` module
+
+This module takes care of writing CSV data to strings. It has one function each
+for writing out fields, records and entire files.
+
 ## The low-level `streamcsv.read` module
 
 Generally, all the functions of this module are structured as follows:
