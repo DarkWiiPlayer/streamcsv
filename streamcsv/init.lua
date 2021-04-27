@@ -1,6 +1,7 @@
 local streamcsv, name = {}, ...
 
 streamcsv.read = require(name .. ".read")
+streamcsv.write = require(name .. ".write")
 
 function streamcsv.header(record, header)
 	for position, name in ipairs(header) do
