@@ -63,10 +63,20 @@ function streamcsv.records(input, options)
 			state.header = streamcsv.read.record(options.header, 1, sep)
 		elseif options.header then
 			state.header, state[1], state[2] = streamcsv.read.record(state[1], state[2], state[3], state[4])
+			state[2] = state[2]+1
 		end
 	end
 
 	return nextrecord, state, 0
+end
+
+--- Reads a whole file into a table using streamcsv.records
+function streamcsv.file(input, options)
+	local result = {}
+	for index, record in streamcsv.records(input, options) do
+		result[index] = record
+	end
+	return result
 end
 
 return streamcsv
