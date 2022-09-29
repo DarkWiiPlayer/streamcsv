@@ -29,16 +29,15 @@ end
 function streamcsv.records(input, options)
 	if type(options) ~= "table" then options=nil end
 
+	local colsep, rowsep, sep
 	if options then
-		local colsep, rowsep, sep = options.colsep, options.rowsep
+		colsep, rowsep, sep = options.colsep, options.rowsep
 		if rowsep and colsep then
 			sep = rowsep..colsep
 		elseif rowsep then
 			sep = rowsep..","
 		elseif colsep then
 			sep = "\n"..colsep
-		else
-			sep = "\n,"
 		end
 	end
 
