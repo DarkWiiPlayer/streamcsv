@@ -1,5 +1,5 @@
 --- Parses CSV files into Lua tables
--- @module streamcsv
+-- @module streamcsv.read
 
 local read = {}
 

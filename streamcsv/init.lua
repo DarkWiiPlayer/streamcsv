@@ -1,8 +1,16 @@
+--- High-level module for parsing CSV date
+-- @module streamcsv
+
 local streamcsv, name = {}, ...
 
 streamcsv.read = require(name .. ".read")
 streamcsv.write = require(name .. ".write")
 
+--- Adds headers to a record.
+-- Note that the resulting record saves a direct reference to the header as passed into this function at index `[0]`, so modifying this value could cause trouble elsewhere.
+-- @tparam sequence Input record as a list of values
+-- @tparam sequence Header as list of keys
+-- @treturn table Record containing its values as integer (position) and string (header) indices, and the header at the `[0]`th index
 function streamcsv.header(record, header)
 	for position, name in ipairs(header) do
 		record[header[position]] = record[position]
@@ -23,9 +31,16 @@ local function nextrecord(state, counter)
 	end
 end
 
+--- Options table to be passed to `streamcsv.records` and `streamcsv.file`
+-- @tfield string rowsep A single character representing the row separator.
+-- @tfield string colsep A single character representing the column separator.
+-- @field header A CSV string or Lua sequence containing the header values, or any other truthy value to read the first row of the input data.
+-- @tfield integer block The (max) block size in bytes to consume at a time. Defaults to 4MB.
+-- @table options
+
 --- Returns an iterator over records in a CSV file
 -- @param input A CSV-String or io-object to parse
--- @tparam[opt] table Options
+-- @tparam[opt] options options
 function streamcsv.records(input, options)
 	if type(options) ~= "table" then options=nil end
 
@@ -69,7 +84,10 @@ function streamcsv.records(input, options)
 	return nextrecord, state, 0
 end
 
---- Reads a whole file into a table using streamcsv.records
+--- Reads a whole file into a table using streamcsv.records.
+-- Note that a "file" in this context refers to a collection of CSV records, not an OS-level file.
+-- @param input A string containing CSV data or a readable I/O object
+-- @tparam[opt] options options
 function streamcsv.file(input, options)
 	local result = {}
 	for index, record in streamcsv.records(input, options) do
