@@ -1,4 +1,4 @@
---- Parses CSV files into Lua tables
+--- Low-level stream-based functions to parse CSV data.
 -- @module streamcsv.read
 
 local read = {}
