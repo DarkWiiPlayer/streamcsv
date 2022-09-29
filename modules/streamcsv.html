@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Tables">Tables</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><strong>streamcsv</strong></li>
+  <li><a href="../modules/streamcsv.read.html">streamcsv.read</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/readme.md.html">readme</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>streamcsv</code></h1>
+<p>High-level module for parsing CSV date</p>
+<p>
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#header">header (Input, Header)</a></td>
+	<td class="summary">Adds headers to a record.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#records">records (input[, options])</a></td>
+	<td class="summary">Returns an iterator over records in a CSV file</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#file">file (input[, options])</a></td>
+	<td class="summary">Reads a whole file into a table using streamcsv.records.</td>
+	</tr>
+</table>
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#options">options</a></td>
+	<td class="summary">Options table to be passed to <a href="../modules/streamcsv.html#records">streamcsv.records</a> and <a href="../modules/streamcsv.html#file">streamcsv.file</a></td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "header"></a>
+    <strong>header (Input, Header)</strong>
+    </dt>
+    <dd>
+    Adds headers to a record.
+ Note that the resulting record saves a direct reference to the header as passed into this function at index <code>[0]</code>, so modifying this value could cause trouble elsewhere.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">Input</span>
+            <span class="types"><span class="type">sequence</span></span>
+         record as a list of values
+        </li>
+        <li><span class="parameter">Header</span>
+            <span class="types"><span class="type">sequence</span></span>
+         as list of keys
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        Record containing its values as integer (position) and string (header) indices, and the header at the <code>[0]</code>th index
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "records"></a>
+    <strong>records (input[, options])</strong>
+    </dt>
+    <dd>
+    Returns an iterator over records in a CSV file
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">input</span>
+         A CSV-String or io-object to parse
+        </li>
+        <li><span class="parameter">options</span>
+            <span class="types"><a class="type" href="../modules/streamcsv.html#options">options</a></span>
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "file"></a>
+    <strong>file (input[, options])</strong>
+    </dt>
+    <dd>
+    Reads a whole file into a table using streamcsv.records.
+ Note that a &ldquo;file&rdquo; in this context refers to a collection of CSV records, not an OS-level file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">input</span>
+         A string containing CSV data or a readable I/O object
+        </li>
+        <li><span class="parameter">options</span>
+            <span class="types"><a class="type" href="../modules/streamcsv.html#options">options</a></span>
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "options"></a>
+    <strong>options</strong>
+    </dt>
+    <dd>
+    Options table to be passed to <a href="../modules/streamcsv.html#records">streamcsv.records</a> and <a href="../modules/streamcsv.html#file">streamcsv.file</a>
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">rowsep</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         A single character representing the row separator.
+        </li>
+        <li><span class="parameter">colsep</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         A single character representing the column separator.
+        </li>
+        <li><span class="parameter">header</span>
+         A CSV string or Lua sequence containing the header values, or any other truthy value to read the first row of the input data.
+        </li>
+        <li><span class="parameter">block</span>
+            <span class="types"><span class="type">integer</span></span>
+         The (max) block size in bytes to consume at a time. Defaults to 4MB.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2022-09-29 12:09:36 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

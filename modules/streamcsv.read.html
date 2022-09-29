@@ -1,0 +1,304 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/streamcsv.html">streamcsv</a></li>
+  <li><strong>streamcsv.read</strong></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/readme.md.html">readme</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>streamcsv.read</code></h1>
+<p>Parses CSV files into Lua tables</p>
+<p>
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#ufield">ufield (current, first, consume)</a></td>
+	<td class="summary">Parses an un-quoted CSV field.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#qfield">qfield (current, first, consume)</a></td>
+	<td class="summary">Parses a quoted CSV field.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#field">field (current, first, consume)</a></td>
+	<td class="summary">Parses any CSV field.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#record">record (current, first, consume)</a></td>
+	<td class="summary">Parses lines of CSV items.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#file">file (current, first, consume)</a></td>
+	<td class="summary">Parses entire CSV files.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "ufield"></a>
+    <strong>ufield (current, first, consume)</strong>
+    </dt>
+    <dd>
+    Parses an un-quoted CSV field.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">current</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The (sub-)string that is currently being parsed
+        </li>
+        <li><span class="parameter">first</span>
+            <span class="types"><span class="type">number</span></span>
+         The first unparsed index in current
+        </li>
+        <li><span class="parameter">consume</span>
+            <span class="types"><span class="type">function</span></span>
+         A function that returns the next substring
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        The main result of the function</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        The current string snippet returned by <code>consume</code></li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        The next index to be parsed</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "qfield"></a>
+    <strong>qfield (current, first, consume)</strong>
+    </dt>
+    <dd>
+    Parses a quoted CSV field.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">current</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The (sub-)string that is currently being parsed
+        </li>
+        <li><span class="parameter">first</span>
+            <span class="types"><span class="type">number</span></span>
+         The first unparsed index in current
+        </li>
+        <li><span class="parameter">consume</span>
+            <span class="types"><span class="type">function</span></span>
+         A function that returns the next substring
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        The main result of the function</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        The current string snippet returned by <code>consume</code></li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        The next index to be parsed</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "field"></a>
+    <strong>field (current, first, consume)</strong>
+    </dt>
+    <dd>
+    Parses any CSV field.
+ Redirects to the correct field-parsing function depending on whether the
+ field starts with a quote.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">current</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The (sub-)string that is currently being parsed
+        </li>
+        <li><span class="parameter">first</span>
+            <span class="types"><span class="type">number</span></span>
+         The first unparsed index in current
+        </li>
+        <li><span class="parameter">consume</span>
+            <span class="types"><span class="type">function</span></span>
+         A function that returns the next substring
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        The main result of the function</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        The current string snippet returned by <code>consume</code></li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        The next index to be parsed</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "record"></a>
+    <strong>record (current, first, consume)</strong>
+    </dt>
+    <dd>
+    Parses lines of CSV items.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">current</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The (sub-)string that is currently being parsed
+        </li>
+        <li><span class="parameter">first</span>
+            <span class="types"><span class="type">number</span></span>
+         The first unparsed index in current
+        </li>
+        <li><span class="parameter">consume</span>
+            <span class="types"><span class="type">function</span></span>
+         A function that returns the next substring
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        The main result of the function</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        The current string snippet returned by <code>consume</code></li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        The next index to be parsed</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "file"></a>
+    <strong>file (current, first, consume)</strong>
+    </dt>
+    <dd>
+    Parses entire CSV files.
+ A &ldquo;files&rdquo; being a collection of recods, not in the sense of the Filesystem.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">current</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The (sub-)string that is currently being parsed
+        </li>
+        <li><span class="parameter">first</span>
+            <span class="types"><span class="type">number</span></span>
+         The first unparsed index in current
+        </li>
+        <li><span class="parameter">consume</span>
+            <span class="types"><span class="type">function</span></span>
+         A function that returns the next substring
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        The main result of the function</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        The current string snippet returned by <code>consume</code></li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        The next index to be parsed</li>
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2022-09-29 12:09:36 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
