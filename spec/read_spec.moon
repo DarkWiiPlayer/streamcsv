@@ -38,18 +38,18 @@ describe '#quoted field parser', ->
 		it 'handles initial positions', ->
 			assert.equal 'foo', csv.read.qfield '"foo","bar","baz"'
 		it 'handles in-between positions', ->
-			assert.equal 'bar', csv.read.qfield '"foo","bar","baz"', 7, nil
+			assert.equal 'bar', csv.read.qfield '"foo","bar","baz"', 7
 		it 'handles final positions', ->
-			assert.equal 'baz', csv.read.qfield '"foo","bar","baz"', 13, nil
+			assert.equal 'baz', csv.read.qfield '"foo","bar","baz"', 13
 		it 'handles empty fields', ->
-			assert.equal '', csv.read.qfield '"foo","","bar"', 7, nil
+			assert.equal '', csv.read.qfield '"foo","","bar"', 7
 		it 'handles escaped quotes', ->
 			assert.equal 'a"b', csv.read.qfield '"a""b"'
 	describe 'with consumer', ->
 		it 'handles single characters', ->
-			assert.equal 'foo', csv.read.qfield '"', 1, nil, iter 'foo","bar","baz"', '.'
+			assert.equal 'foo', csv.read.qfield '"', 1, iter 'foo","bar","baz"', '.'
 		it 'handles single characters with escaped quotes', ->
-			assert.equal 'fo\n"o', csv.read.qfield '', 1, nil, iter '"fo\n""o","bar","baz"', '.'
+			assert.equal 'fo\n"o', csv.read.qfield '', 1, iter '"fo\n""o","bar","baz"', '.'
 
 describe '#record parser', ->
 	file = 'foo,bar,baz\nFoo,Bar,Baz\nFOO,BAR,BAZ'

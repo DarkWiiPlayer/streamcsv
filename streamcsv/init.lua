@@ -1,19 +1,19 @@
 --- High-level module for parsing CSV date
 -- @module streamcsv
 
-local streamcsv, name = {}, ...
+local streamcsv, modname = {}, ...
 
-streamcsv.read = require(name .. ".read")
-streamcsv.write = require(name .. ".write")
+streamcsv.read = require(modname .. ".read")
+streamcsv.write = require(modname .. ".write")
 
 --- Adds headers to a record.
 -- Note that the resulting record saves a direct reference to the header as passed into this function at index `[0]`, so modifying this value could cause trouble elsewhere.
--- @tparam sequence Input record as a list of values
--- @tparam sequence Header as list of keys
+-- @tparam sequence record Input record as a list of values
+-- @tparam sequence header as list of keys
 -- @treturn table Record containing its values as integer (position) and string (header) indices, and the header at the `[0]`th index
 function streamcsv.header(record, header)
 	for position, name in ipairs(header) do
-		record[header[position]] = record[position]
+		record[name] = record[position]
 		record[0] = header
 	end
 end
@@ -46,7 +46,7 @@ function streamcsv.records(input, options)
 
 	local colsep, rowsep, sep
 	if options then
-		colsep, rowsep, sep = options.colsep, options.rowsep
+		colsep, rowsep, sep = options.colsep, options.rowsep, nil
 		if rowsep and colsep then
 			sep = rowsep..colsep
 		elseif rowsep then

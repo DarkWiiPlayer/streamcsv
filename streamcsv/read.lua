@@ -3,17 +3,18 @@
 
 local read = {}
 
-local q = ('"'):byte()
+local Q = ('"'):byte()
 
 --- Parses an un-quoted CSV field.
 -- @tparam string current The (sub-)string that is currently being parsed
 -- @tparam number first The first unparsed index in current
+-- @tparam string sep Separator pair
 -- @tparam function consume A function that returns the next substring
 -- @return The main result of the function
 -- @treturn string The current string snippet returned by `consume`
 -- @treturn number The next index to be parsed
 function read.ufield(current, first, sep, consume)
-	local first = first or 1
+	first = first or 1
 	sep = "["..(sep or "\n,").."]"
 	local last = current:find(sep, first)
 	if not last then
@@ -46,9 +47,9 @@ end
 -- @return The main result of the function
 -- @treturn string The current string snippet returned by `consume`
 -- @treturn number The next index to be parsed
-function read.qfield(current, first, sep, consume)
-	local first = first or 1
-	local q = q
+function read.qfield(current, first, consume)
+	first = first or 1
+	local q = Q
 	if first > #current then
 		current = consume and consume()
 		first = 2
@@ -107,14 +108,15 @@ end
 -- field starts with a quote.
 -- @tparam string current The (sub-)string that is currently being parsed
 -- @tparam number first The first unparsed index in current
+-- @tparam string sep Separator pair
 -- @tparam function consume A function that returns the next substring
 -- @return The main result of the function
 -- @treturn string The current string snippet returned by `consume`
 -- @treturn number The next index to be parsed
 function read.field(current, first, sep, consume)
-	local first = first or 1
-	if current:byte(first,first) == q then
-		return read.qfield(current, first, sep, consume)
+	first = first or 1
+	if current:byte(first,first) == Q then
+		return read.qfield(current, first, consume)
 	else
 		return read.ufield(current, first, sep, consume)
 	end
@@ -123,12 +125,13 @@ end
 --- Parses lines of CSV items.
 -- @tparam string current The (sub-)string that is currently being parsed
 -- @tparam number first The first unparsed index in current
+-- @tparam string sep Separator pair
 -- @tparam function consume A function that returns the next substring
 -- @return The main result of the function
 -- @treturn string The current string snippet returned by `consume`
 -- @treturn number The next index to be parsed
 function read.record(current, first, sep, consume)
-	local first = first or 1
+	first = first or 1
 	local record = {}
 	local field
 	sep = sep or '\n,'
@@ -150,12 +153,13 @@ end
 -- A "files" being a collection of recods, not in the sense of the Filesystem.
 -- @tparam string current The (sub-)string that is currently being parsed
 -- @tparam number first The first unparsed index in current
+-- @tparam string sep Separator pair
 -- @tparam function consume A function that returns the next substring
 -- @return The main result of the function
 -- @treturn string The current string snippet returned by `consume`
 -- @treturn number The next index to be parsed
 function read.file(current, first, sep, consume)
-	local first = first or 1
+	first = first or 0
 	local file = {}
 	local record
 	while first do

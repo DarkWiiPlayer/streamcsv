@@ -1,3 +1,6 @@
+--- Write CSV output
+-- @module streamcsv.write
+
 local write = {}
 
 local read = require((...):gsub("write","read"))
