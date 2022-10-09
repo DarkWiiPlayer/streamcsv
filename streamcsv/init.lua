@@ -7,10 +7,13 @@ streamcsv.read = require(modname .. ".read")
 streamcsv.write = require(modname .. ".write")
 
 --- Adds headers to a record.
--- Note that the resulting record saves a direct reference to the header as passed into this function at index `[0]`, so modifying this value could cause trouble elsewhere.
+-- Note that the resulting record saves a direct reference to the header as
+-- passed into this function at index `[0]`, so modifying this value could
+-- cause trouble elsewhere.
 -- @tparam sequence record Input record as a list of values
 -- @tparam sequence header as list of keys
--- @treturn table Record containing its values as integer (position) and string (header) indices, and the header at the `[0]`th index
+-- @treturn table Record containing its values as integer (position) and string
+-- (header) indices, and the header at the `[0]`th index
 function streamcsv.header(record, header)
 	for position, name in ipairs(header) do
 		record[name] = record[position]
@@ -34,7 +37,8 @@ end
 --- Options table to be passed to `streamcsv.records` and `streamcsv.file`
 -- @tfield string rowsep A single character representing the row separator.
 -- @tfield string colsep A single character representing the column separator.
--- @field header A CSV string or Lua sequence containing the header values, or any other truthy value to read the first row of the input data.
+-- @field header A CSV string or Lua sequence containing the header values, or
+-- any other truthy value to read the first row of the input data.
 -- @tfield integer block The (max) block size in bytes to consume at a time. Defaults to 4MB.
 -- @table options
 
