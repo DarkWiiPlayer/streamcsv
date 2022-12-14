@@ -5,6 +5,11 @@ describe 'Field writer', ->
 		assert.equal 'foobar', field 'foobar'
 	it "converts numbers to strings", ->
 		assert.equal '123', field 123
+	it "converts booleans to strings", ->
+		assert.same 'true', field true
+		assert.same 'false', field false
+	it "turns nil into an empty record", ->
+		assert.equal '', field nil
 	it "escapes separators", ->
 		assert.equal '"foo\tbar"', field 'foo\tbar', '\t;'
 		assert.equal '"foo;bar"', field 'foo;bar', '\t;'

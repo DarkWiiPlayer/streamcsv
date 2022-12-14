@@ -7,7 +7,11 @@ local read = require((...):gsub("write","read"))
 
 function write.field(field, sep)
 	sep = sep or "\n,"
-	field = tostring(field)
+	if field == nil then
+		return ''
+	else
+		field = tostring(field)
+	end
 	if field:find("["..sep.."]") or field:find('^"') then
 		return '"'..field:gsub('"', '""')..'"'
 	else
