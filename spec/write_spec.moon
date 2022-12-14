@@ -20,9 +20,9 @@ describe 'Record writer', ->
 		assert.equal 'foo;bar', record {'foo', 'bar'}, nil, '\t;'
 	it "respects headers", ->
 		assert.equal '1,2', record {a: 1, b: 2}, {"a", "b"}
-	it "ignore headers for array records", ->
-		assert.equal '1,2', record {1, 2}, {"a", "b"}
-		assert.equal '1;2', record {1, 2}, "a;b", "\n;"
+	it "uses headers over array records", ->
+		assert.equal ',', record {1, 2}, {"a", "b"}
+		assert.equal ';', record {1, 2}, "a;b", "\n;"
 
 describe 'File writer', ->
 	it "writes simple files", ->

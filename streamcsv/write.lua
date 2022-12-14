@@ -23,7 +23,7 @@ function write.record(record, header, sep)
 	local buf = {}
 	if header then
 		for i, name in ipairs(header) do
-			buf[i] = write.field(record[i] or record[name], sep)
+			buf[i] = write.field(record[name], sep)
 		end
 	else
 		for i, field in ipairs(record) do
