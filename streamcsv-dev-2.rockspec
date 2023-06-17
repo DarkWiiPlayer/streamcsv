@@ -1,5 +1,5 @@
 package = "streamcsv"
-version = "dev-1"
+version = "dev-2"
 source = {
 	url = "git+https://github.com/darkwiiplayer/streamcsv.git"
 }
@@ -11,8 +11,8 @@ description = {
 build = {
 	type = "builtin",
 	modules = {
-		["streamcsv"]= "streamcsv/init.lua";
-		["streamcsv.read"] = "streamcsv/read.lua";
-		["streamcsv.write"] = "streamcsv/write.lua";
+		["streamcsv"]= "src/streamcsv.lua";
+		["streamcsv.read"] = "src/streamcsv/read.lua";
+		["streamcsv.write"] = "src/streamcsv/write.lua";
 	}
 }
