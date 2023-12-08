@@ -6,13 +6,13 @@ local read = {}
 local Q = ('"'):byte()
 
 --- Parses an un-quoted CSV field.
--- @tparam string current The (sub-)string that is currently being parsed
--- @tparam number first The first unparsed index in current
--- @tparam string sep Separator pair
--- @tparam function consume A function that returns the next substring
--- @return The main result of the function
--- @treturn string The current string snippet returned by `consume`
--- @treturn number The next index to be parsed
+--- @param current string The (sub-)string that is currently being parsed
+--- @param first integer The first unparsed index in current
+--- @param sep string Separator pair
+--- @param consume fun():string A function that returns the next substring
+--- @return string field The main result of the function
+--- @return string|nil current The current string snippet returned by `consume`
+--- @return number|nil next The next index to be parsed
 function read.ufield(current, first, sep, consume)
 	first = first or 1
 	sep = "["..(sep or "\n,").."]"
@@ -41,12 +41,12 @@ function read.ufield(current, first, sep, consume)
 end
 
 --- Parses a quoted CSV field.
--- @tparam string current The (sub-)string that is currently being parsed
--- @tparam number first The first unparsed index in current
--- @tparam function consume A function that returns the next substring
--- @return The main result of the function
--- @treturn string The current string snippet returned by `consume`
--- @treturn number The next index to be parsed
+--- @param current string The (sub-)string that is currently being parsed
+--- @param first number The first unparsed index in current
+--- @param consume fun():string A function that returns the next substring
+--- @return string field The main result of the function
+--- @return string|nil current The current string snippet returned by `consume`
+--- @return integer|nil next The next index to be parsed
 function read.qfield(current, first, consume)
 	first = first or 1
 	local q = Q
@@ -106,13 +106,13 @@ end
 --- Parses any CSV field.
 -- Redirects to the correct field-parsing function depending on whether the
 -- field starts with a quote.
--- @tparam string current The (sub-)string that is currently being parsed
--- @tparam number first The first unparsed index in current
--- @tparam string sep Separator pair
--- @tparam function consume A function that returns the next substring
--- @return The main result of the function
--- @treturn string The current string snippet returned by `consume`
--- @treturn number The next index to be parsed
+--- @param current string The (sub-)string that is currently being parsed
+--- @param first number The first unparsed index in current
+--- @param sep string Separator pair
+--- @param consume fun():string A function that returns the next substring
+--- @return string field The main result of the function
+--- @return string|nil current The current string snippet returned by `consume`
+--- @return number|nil next The next index to be parsed
 function read.field(current, first, sep, consume)
 	first = first or 1
 	if current:byte(first,first) == Q then
@@ -123,13 +123,13 @@ function read.field(current, first, sep, consume)
 end
 
 --- Parses lines of CSV items.
--- @tparam string current The (sub-)string that is currently being parsed
--- @tparam number first The first unparsed index in current
--- @tparam string sep Separator pair
--- @tparam function consume A function that returns the next substring
--- @return The main result of the function
--- @treturn string The current string snippet returned by `consume`
--- @treturn number The next index to be parsed
+--- @param current string The (sub-)string that is currently being parsed
+--- @param first integer The first unparsed index in current
+--- @param sep string Separator pair
+--- @param consume fun():string A function that returns the next substring
+--- @return string[] record The main result of the function
+--- @return string|nil current The current string snippet returned by `consume`
+--- @return integer|nil next The next index to be parsed
 function read.record(current, first, sep, consume)
 	first = first or 1
 	local record = {}
@@ -151,13 +151,11 @@ end
 
 --- Parses entire CSV files.
 -- A "files" being a collection of recods, not in the sense of the Filesystem.
--- @tparam string current The (sub-)string that is currently being parsed
--- @tparam number first The first unparsed index in current
--- @tparam string sep Separator pair
--- @tparam function consume A function that returns the next substring
--- @return The main result of the function
--- @treturn string The current string snippet returned by `consume`
--- @treturn number The next index to be parsed
+--- @param current string The (sub-)string that is currently being parsed
+--- @param first integer The first unparsed index in current
+--- @param sep string Separator pair
+--- @param consume fun():string A function that returns the next substring
+--- @return string[][] file The main result of the function
 function read.file(current, first, sep, consume)
 	first = first or 0
 	local file = {}

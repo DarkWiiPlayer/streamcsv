@@ -5,6 +5,9 @@ local write = {}
 
 local read = require((...):gsub("write","read"))
 
+--- Quotes a field if necessary
+--- @param field string
+--- @param sep string
 function write.field(field, sep)
 	sep = sep or "\n,"
 	if field == nil then
@@ -19,6 +22,9 @@ function write.field(field, sep)
 	end
 end
 
+--- @param record string[]|table<string,string>
+--- @param header string|string[]
+--- @param sep string
 function write.record(record, header, sep)
 	sep = sep or "\n,"
 	if type(header)=="string" then
@@ -37,6 +43,9 @@ function write.record(record, header, sep)
 	return table.concat(buf, sep:sub(2,2))
 end
 
+--- @param file string[][]|table<string,string>[]
+--- @param header string|string[]
+--- @param sep string
 function write.file(file, header, sep)
 	sep = sep or "\n,"
 	if type(header)=="string" then
