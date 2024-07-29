@@ -21,7 +21,7 @@ This file will be treated as having no initial header line. To indicate that the
 first line should be read as a header, set the `header` option to true:
 
 ```lua
-for idx, record in streamcsv.records(io.open("test2.csv", {header=true})) do
+for idx, record in streamcsv.records(io.open("test2.csv"), {header=true}) do
 	print(table.unpack(record))
 end
 ```
@@ -30,9 +30,9 @@ When a header is not part of the CSV file, but is otherwise known, it can be
 passed explicitly:
 
 ```lua
-for idx, record in streamcsv.records("1,2,3", header="a,b,c")
+streamcsv.records("1,2,3", {header="a,b,c"})
 -- or
-for idx, record in streamcsv.records("1,2,3", header={"a", "b", "c"})
+streamcsv.records("1,2,3", {header={"a", "b", "c"}})
 ```
 
 ## The `write` module
